@@ -62,49 +62,53 @@ router.post("/signup", async (req, res, next) => {
 
 
 // POST "/api/auth/login" => recibir credenciales del usuario y validarlo
-router.post("/login", async (req, res, next) => { 
+router.post("/login", async (req, res, next) => {
 
-    console.log(req.body)
-    const { email, password} = req.body
+  console.log(req.body)
+  const { email, password } = req.body
 
-    if ( !email || !password) {
-        res.status(400).json({ errorMessage: "Todos los campos deben estar llenos"})
-        return
+  if ( !email || !password ) {
+    res.status(400).json({ errorMessage: "Todos los campos deben estar llenos" })
+    console.log("hola")
+    return // deten la ejecución de la ruta
+  }
+
+  try {
+
+    const foundUser = await User.findOne({ email: email })
+    if (!foundUser) {
+      res.status(400).json({errorMessage: "Usuario no registrado"})
+      return
     }
 
-    try {
-
-        const foundUser = await User.findOne({ email: email })
-        if (!foundUser) {
-            res.status(400).json({errorMessage: "Usuario no registrado"})
-            return
-        }
-
-        const isPasswordValid = await bcrypt.compare(password, foundUser.password)
-        if (!isPasswordValid) {
-            res.status(400).json({errorMessage: "Contraseña no valida"})
-            return
-        }
-
-        const payload = {
-            _id: foundUser._id,
-            email: foundUser.email
-        }
-
-        const authToken = jwt.sign(payload, process.env.TOKEN_SECRET, {expiresIn: "2d"})
-
-        res.json ({authToken: authToken})
-
-    } catch {
-        next(error)
+    const isPasswordValid = await bcrypt.compare(password, foundUser.password)
+    if (!isPasswordValid) {
+      res.status(400).json({errorMessage: "Contraseña no valida"})
+      return
     }
+
+    const payload = {
+      _id: foundUser._id,
+      email: foundUser.email,
+      // ! si tuvieramos roles, los agregamos tambien
+    }
+
+    const authToken = jwt.sign(payload, process.env.TOKEN_SECRET, { expiresIn: '2d' })
+
+    res.json({ authToken: authToken })
+
+
+  } catch (error) {
+    next(error)
+  }
+
 })
 
 
 // GET "/apit/auth/verify" => Indicar al FE si está que visita la pagina está activo y quien es
 router.get("/verify", isTokenValid, (req, res, next) => {
   
-  res.json("todo ok")
+  res.json({payload: req.payload})
 })
 
 module.exports = router;
