@@ -22,7 +22,7 @@ const userSchema = new Schema(
       required: [true, "Password is required."],
     },
     image: String,
-    favgames: [ObjectId],
+    favgames: String,
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`
