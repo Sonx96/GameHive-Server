@@ -1,6 +1,21 @@
+const Game = require("../models/Game.model")
+
 const router = require("express").Router()
 
-const Game = require("../models/Game.model")
+
+
+// GET "/" => enviar todos los juegos. Name y Image.
+router.get("/", async (req, res, next) => {
+
+    try {
+        const data = await Game.find().select({name: 1, image: 1})
+
+        res.json(data)
+
+    } catch (error) {
+        next(error)
+    }
+})
 
 // POST "/addgame" => recibir la data del juego y crearla en BD
 router.post("/addgame", async (req, res, next) => {
