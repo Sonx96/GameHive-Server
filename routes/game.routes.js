@@ -54,4 +54,32 @@ router.post("/addgame", async (req, res, next) => {
     }
 })
 
+// GET "/:gameId" => enviar los detalles de un game por su id
+router.get("/:gameId", async (req, res, next) => {
+
+    console.log(req.params)
+
+    try {
+        const oneGame = await Game.findById(req.params.gameId)
+
+        res.json(oneGame)
+
+    } catch (error) {
+        next(error)
+    }
+})
+
+// DELETE "/:gameId" => borrar game por su id
+router.delete("/:gameId", async (req, res, next) => {
+    
+    try {
+
+        await Game.findByIdAndDelete(req.params.gameId)
+        res.json("game borrado")
+
+    } catch (error) {
+        next(error)
+    }
+})
+
 module.exports = router

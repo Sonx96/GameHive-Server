@@ -17,10 +17,12 @@ router.get("/", async (req, res, next) => {
   }
 })
 
+//! cambiar prefijo
 const authRouter = require("./auth.routes")
 router.use("/auth", authRouter)
 
+//! cambiar prefijo
 const gameRouter = require("./game.routes")
-router.use("/auth", gameRouter)
+router.use("/game", gameRouter)
 
 module.exports = router;
