@@ -93,8 +93,8 @@ router.put("/:gameId", async (req, res, next) => {
     try {
 
         await Game.findByIdAndUpdate(gameId, { name, description, company, category, players, age, image, tutorial})
-        res.jason("game actualizado")
-        
+        res.json("game actualizado")
+
     } catch (error) {
         next(error)
     }
