@@ -82,4 +82,23 @@ router.delete("/:gameId", async (req, res, next) => {
     }
 })
 
+// PUT "/:id" => editar todas las propiedades del game por su id
+router.put("/:gameId", async (req, res, next) => {
+
+    const { gameId } = req.params
+    const { name, description, company, category, players, age, image, tutorial} = req.body
+
+    console.log(req.params, req.body)
+
+    try {
+
+        await Game.findByIdAndUpdate(gameId, { name, description, company, category, players, age, image, tutorial})
+        res.jason("game actualizado")
+        
+    } catch (error) {
+        next(error)
+    }
+
+})
+
 module.exports = router
