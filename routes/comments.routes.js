@@ -1,16 +1,19 @@
+const router = require("express").Router();
+const Comment = require("../models/Comment.model")
+
+//GET 
 
 
 // POST "/:gameid" recibir la data del comentario y crearla
-router.post("/gameid", async (req, res, next) => {
+router.post("/addComment", async (req, res, next) => {
 
-    console.log(req.body)
     const { user, comment, game} = req.body
 
     try{
-        await Game.create({
+        await Comment.create({
             user: req.body.user,
             comment: req.body.comment,
-            game: req.body.game
+            game: req.body.game,
         })
 
         res.status(201).json("comentario creado")
@@ -21,4 +24,5 @@ router.post("/gameid", async (req, res, next) => {
 })
 
 // DELETE "/:gameId" borrar comentario por su id
-router.delete("/:gameid", asyn)
+
+module.exports = router

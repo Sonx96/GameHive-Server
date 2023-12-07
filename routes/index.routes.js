@@ -25,4 +25,7 @@ router.use("/auth", authRouter)
 const gameRouter = require("./game.routes")
 router.use("/game", gameRouter)
 
+const commentRouter = require("./comments.routes")
+router.use("/comment", commentRouter)
+
 module.exports = router;

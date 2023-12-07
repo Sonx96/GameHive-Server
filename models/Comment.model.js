@@ -1,9 +1,9 @@
 const { Schema, model } = require("mongoose");
 
 const commentSchema = new Schema({
-  user: ObjectId,
+  user: String,
   comment: String,
-  game: ObjectId,
+  game: String,
 });
 
 const Comment = model("Comment", commentSchema);
