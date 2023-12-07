@@ -10,6 +10,7 @@ router.post("/signup", async (req, res, next) => {
     // console.log(req.body)
   
     const { username, email, password } = req.body
+    const role = "user";
   
     // implementariamos todas las validaciones de backend igual a M2
   
@@ -49,7 +50,8 @@ router.post("/signup", async (req, res, next) => {
       await User.create({
         username,
         email,
-        password: hashPassword
+        password: hashPassword,
+        role
       })
 
       res.status(201).json("usuario creado")
@@ -90,6 +92,7 @@ router.post("/login", async (req, res, next) => {
     const payload = {
       _id: foundUser._id,
       email: foundUser.email,
+      role: foundUser.role
       // ! si tuvieramos roles, los agregamos tambien
     }
 
@@ -105,7 +108,7 @@ router.post("/login", async (req, res, next) => {
 })
 
 
-// GET "/apit/auth/verify" => Indicar al FE si está que visita la pagina está activo y quien es
+// GET "/api/auth/verify" => Indicar al FE si está que visita la pagina está activo y quien es
 router.get("/verify", isTokenValid, (req, res, next) => {
   
   res.json({payload: req.payload})

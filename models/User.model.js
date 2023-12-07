@@ -23,6 +23,7 @@ const userSchema = new Schema(
     },
     image: String,
     favgames: String,
+    role: String
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`

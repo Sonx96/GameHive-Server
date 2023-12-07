@@ -89,6 +89,7 @@ router.put("/:gameId", async (req, res, next) => {
     const { name, description, company, category, players, age, image, tutorial} = req.body
 
     console.log(req.params, req.body)
+    console.log("hola")
 
     try {
 
