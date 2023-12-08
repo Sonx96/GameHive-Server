@@ -23,8 +23,4 @@ router.use("/game", gameRoutes)
 const commentRoutes = require("./comments.routes")
 router.use("/comment", commentRoutes)
 
-const uploadRoutes = require("./upload.routes");
-router.use("/upload", uploadRoutes);
-
-
 module.exports = router;
