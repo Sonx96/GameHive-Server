@@ -1,10 +1,6 @@
 const router = require("express").Router();
 const Game = require("../models/Game.model")
 
-// router.get("/", (req, res, next) => {
-//   res.json("All good in here");
-// });
-
 router.get("/", async (req, res, next) => {
 
   try {
@@ -17,15 +13,18 @@ router.get("/", async (req, res, next) => {
   }
 })
 
-//! cambiar prefijo
-const authRouter = require("./auth.routes")
-router.use("/auth", authRouter)
 
-//! cambiar prefijo
-const gameRouter = require("./game.routes")
-router.use("/game", gameRouter)
+const authRoutes = require("./auth.routes")
+router.use("/auth", authRoutes)
 
-const commentRouter = require("./comments.routes")
-router.use("/comment", commentRouter)
+const gameRoutes = require("./game.routes")
+router.use("/game", gameRoutes)
+
+const commentRoutes = require("./comments.routes")
+router.use("/comment", commentRoutes)
+
+const uploadRoutes = require("./upload.routes");
+router.use("/upload", uploadRoutes);
+
 
 module.exports = router;
