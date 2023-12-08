@@ -91,4 +91,4 @@ Comment model
 
 ### Slides
 
-[Slides Link](www.your-slides-url-here.com)
+[Slides Link](https://docs.google.com/presentation/d/17rsrFYCXPEX6K2Nswm2zc-nYALz5l8SpkdDqCV3czLs/edit#slide=id.g2a3de227e50_0_418)
